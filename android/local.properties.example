@@ -1,0 +1,9 @@
+# Local Properties Template
+# Copy this file to local.properties and add your API keys
+# DO NOT commit local.properties to version control (it's already in .gitignore)
+
+sdk.dir=/path/to/android/sdk
+flutter.sdk=/path/to/flutter/sdk
+
+# Google Maps API Key
+GOOGLE_MAP_API_KEY=YOUR_API_KEY_HERE

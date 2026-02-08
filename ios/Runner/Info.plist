@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>แอปต้องการเข้าถึงตำแหน่งของคุณเพื่อแสดงสถานีตรวจค่า AQI ใกล้เคียง</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>แอปต้องการเข้าถึงตำแหน่งของคุณเพื่อแสดงสถานีตรวจค่า AQI ใกล้เคียง</string>
+	<key>GOOGLE_MAP_API_KEY</key>
+	<string>$(GOOGLE_MAP_API_KEY)</string>
 </dict>
 </plist>
