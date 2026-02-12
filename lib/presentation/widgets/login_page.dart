@@ -26,40 +26,38 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Demo')),
-      body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                key: ValueKey('${widget.key.toString()}/title_text'),
-                "LoginPage",
-              ),
-              Text(
-                key: ValueKey('${widget.key.toString()}/sub_title_text'),
-                "please login to continue",
-              ),
-              ElevatedButton(
-                key: Key('login_button'),
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: Text('สวัสดี'),
-                      content: Text('ยินดีต้อนรับ!'),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: Text('ตกลง'),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                child: Text('Login'),
-              ),
-            ],
-          ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              key: ValueKey('${widget.key.toString()}/title_text'),
+              "LoginPage",
+            ),
+            Text(
+              key: ValueKey('${widget.key.toString()}/sub_title_text'),
+              "please login to continue",
+            ),
+            ElevatedButton(
+              key: Key('login_button'),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text('สวัสดี'),
+                    content: Text('ยินดีต้อนรับ!'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text('ตกลง'),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: Text('Login'),
+            ),
+          ],
         ),
       ),
     );

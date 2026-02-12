@@ -107,8 +107,10 @@ class _HomePageState extends State<HomePage> {
             TextButton(
               onPressed: () async {
                 await _authService.deleteToken();
-                Navigator.of(context).pop();
-                await CoveNav.clearAndPush(AppRoutes.loginPath);
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                  await CoveNav.clearAndPush(AppRoutes.loginPath);
+                }
               },
               child: Text(
                 'ออกจากระบบ',

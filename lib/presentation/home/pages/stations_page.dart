@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pair_app/presentation/home/bloc/station_bloc.dart';
-import 'package:pair_app/presentation/home/bloc/station_event.dart';
-import 'package:pair_app/presentation/home/bloc/station_state.dart';
-import 'package:pair_api/domain/entities/station.dart';
+import 'package:pair_api/pair_api.dart';
+import 'package:pair_app/presentation/home/bloc/station_bloc/station_bloc.dart';
+import 'package:pair_app/presentation/home/bloc/station_bloc/station_event.dart';
+import 'package:pair_app/presentation/home/bloc/station_bloc/station_state.dart';
 import 'package:pcore/pcore.dart';
 
 class StationsPage extends StatefulWidget {
@@ -28,6 +28,7 @@ class _StationsPageState extends State<StationsPage> {
     if (isRefresh) {
       await Future.delayed(const Duration(milliseconds: 1000));
     }
+    if (!mounted) return;
     final bloc = context.read<StationBloc>();
     bloc.add(
       LoadStations(minLat: 13.5, minLon: 100.3, maxLat: 14.1, maxLon: 100.9),
@@ -50,12 +51,12 @@ class _StationsPageState extends State<StationsPage> {
                 separatorBuilder: (_, __) => const SizedBox(height: 6),
               );
             } else if (state is StationHasData) {
-              final List<Station> stations = state.stations;
+              final List<StationEntity> stations = state.stations;
               return ListView.separated(
                 physics: const AlwaysScrollableScrollPhysics(),
                 padding: const EdgeInsets.all(12),
                 itemCount: stations.length,
-                itemBuilder: (context, index) => _buildRow(stations[index]),
+                itemBuilder: (context, index) => _buildStationItem(stations[index]),
                 separatorBuilder: (_, __) => const SizedBox(height: 8),
               );
             } else if (state is StationError) {
@@ -84,13 +85,13 @@ class _StationsPageState extends State<StationsPage> {
     );
   }
 
-  Widget _buildRow(Station s) {
-    final aqiText = s.aqi?.toString() ?? '-';
-    final latText = s.latitude.toStringAsFixed(6);
-    final lonText = s.longitude.toStringAsFixed(6);
-    final timeText = fdate(s.time);
+  Widget _buildStationItem(StationEntity station) {
+    final aqiText = station.aqi?.toString() ?? '-';
+    final latText = station.latitude.toStringAsFixed(6);
+    final lonText = station.longitude.toStringAsFixed(6);
+    final timeText = fdate(station.time);
 
-    final luminance = s.status.color.computeLuminance();
+    final luminance = station.status.color.computeLuminance();
     final aqiTextColor = luminance > 0.6 ? Colors.black : Colors.white;
 
     return Container(
@@ -100,17 +101,19 @@ class _StationsPageState extends State<StationsPage> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 6,
             offset: const Offset(0, 2),
           ),
         ],
       ),
-      child: Material(
+          child: Material(
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
-          onTap: () {},
+              onTap: () {
+                CoveNav.push('/station/detail', extra: station);
+              },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             child: Row(
@@ -131,11 +134,11 @@ class _StationsPageState extends State<StationsPage> {
                   width: 42,
                   height: 42,
                   decoration: BoxDecoration(
-                    color: s.status.color,
+                    color: station.status.color,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: s.status.color.withOpacity(0.22),
+                        color: station.status.color.withValues(alpha: 0.22),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -165,7 +168,7 @@ class _StationsPageState extends State<StationsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        s.name,
+                        station.name,
                         style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
@@ -219,7 +222,7 @@ class _StationsPageState extends State<StationsPage> {
 }
 
 class _StationSkeleton extends StatelessWidget {
-  const _StationSkeleton({Key? key}) : super(key: key);
+  const _StationSkeleton();
 
   @override
   Widget build(BuildContext context) {
@@ -286,7 +289,7 @@ class _StationSkeleton extends StatelessWidget {
 
 class _Shimmer extends StatefulWidget {
   final Widget child;
-  const _Shimmer({Key? key, required this.child}) : super(key: key);
+  const _Shimmer({required this.child});
 
   @override
   State<_Shimmer> createState() => _ShimmerState();

@@ -38,12 +38,12 @@ class Environment {
 
   /// Print current configuration
   static void printConfig() {
-    print('=== Environment Configuration ===');
-    print('Environment: $name');
-    print('API Base URL: $apiBaseUrl');
-    print('API Timeout: $apiTimeout ms');
-    print('Analytics: $enableAnalytics');
-    print('Crash Reporting: $enableCrashReporting');
-    print('================================');
+    // print('=== Environment Configuration ===');
+    // print('Environment: $name');
+    // print('API Base URL: $apiBaseUrl');
+    // print('API Timeout: $apiTimeout ms');
+    // print('Analytics: $enableAnalytics');
+    // print('Crash Reporting: $enableCrashReporting');
+    // print('================================');
   }
 }

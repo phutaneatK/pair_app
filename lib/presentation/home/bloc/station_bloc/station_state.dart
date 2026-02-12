@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:pair_api/domain/entities/station.dart';
+import 'package:pair_api/pair_api.dart';
 
 abstract class StationState extends Equatable {
   @override
@@ -11,7 +11,7 @@ class StationInitial extends StationState {}
 class StationLoading extends StationState {}
 
 class StationHasData extends StationState {
-  final List<Station> stations;
+  final List<StationEntity> stations;
 
   StationHasData(this.stations);
 

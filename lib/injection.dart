@@ -6,13 +6,12 @@ import 'core/services/auth_service.dart';
 import 'presentation/login/bloc/login_bloc.dart';
 import 'presentation/login/cubit/password_visibility_cubit.dart';
 import 'presentation/splash/bloc/splash_bloc.dart';
-import 'presentation/home/bloc/station_bloc.dart';
+import 'presentation/home/bloc/station_bloc/station_bloc.dart';
 
 final getIt = GetIt.instance;
 
 void initGetIt() {
-  // ===== pair_api =====
-
+  // -- Data Sources -------------------------------------------------------
   getIt.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(
       googleSheetId: dotenv.env['GOOGLE_SHEET_ID'] ?? '',
@@ -20,38 +19,47 @@ void initGetIt() {
     ),
   );
 
+  getIt.registerLazySingleton<StationRemoteDataSource>(
+    () => StationRemoteDataSourceImpl(
+      apiBaseUrl: AppConfig.defaultBaseUrl,
+      token: dotenv.env['AIR_API_KEY'] ?? '',
+    ),
+  );
+
+  // -- Repositories -------------------------------------------------------
   getIt.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(getIt<AuthRemoteDataSource>()),
-  );
-
-  getIt.registerLazySingleton<CheckLoginUseCase>(
-    () => CheckLoginUseCase(getIt<AuthRepository>()),
-  );
-
-  getIt.registerLazySingleton<AuthService>(
-    () => AuthService(getIt<AuthRepository>()),
-  );
-
-  getIt.registerLazySingleton<StationRemoteDataSource>(
-    () => StationRemoteDataSourceImpl(apiBaseUrl: AppConfig.defaultBaseUrl),
   );
 
   getIt.registerLazySingleton<StationRepositoryImpl>(
     () => StationRepositoryImpl(getIt<StationRemoteDataSource>()),
   );
 
-  getIt.registerLazySingleton<LoadStationUseCase>(
-    () => LoadStationUseCase(getIt<StationRepositoryImpl>()),
+  // -- Usecases -----------------------------------------------------------
+  getIt.registerLazySingleton<CheckLoginUseCase>(
+    () => CheckLoginUseCase(getIt<AuthRepository>()),
   );
 
+  getIt.registerLazySingleton<GetStationsUseCase>(
+    () => GetStationsUseCase(getIt<StationRepositoryImpl>()),
+  );
+
+  getIt.registerLazySingleton<GetStationByIdUseCase>(
+    () => GetStationByIdUseCase(getIt<StationRepositoryImpl>()),
+  );
+
+  // -- Services -----------------------------------------------------------
+  getIt.registerLazySingleton<AuthService>(
+    () => AuthService(getIt<AuthRepository>()),
+  );
+
+  // -- Presentation: Blocs -----------------------------------------------
   getIt.registerFactory<StationBloc>(
     () => StationBloc(
-      getIt<LoadStationUseCase>(),
+      getIt<GetStationsUseCase>(),
       token: dotenv.env['AIR_API_KEY'] ?? '',
     ),
   );
-
-  // ===== pair_app =====
 
   getIt.registerFactory<SplashBloc>(() => SplashBloc(getIt<AuthService>()));
 

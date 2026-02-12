@@ -38,6 +38,8 @@ dependencies:
   google_maps_flutter: ^2.14.0
   flutter_secure_storage: ^10.0.0
   package_info_plus: ^4.0.0
+  equatable: ^2.0.8
+  bloc: ^9.2.0
 
   # Local packages
   pcore:

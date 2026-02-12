@@ -235,7 +235,7 @@ void main() {
     });
 
     testWidgets('navigates to home when login is successful', (tester) async {
-      final user = User(username: 'testuser', token: 'test-token');
+      final user = UserEntity(username: 'testuser', token: 'test-token');
 
       whenListen(
         mockLoginBloc,

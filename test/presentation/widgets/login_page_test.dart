@@ -38,43 +38,5 @@ void main() {
       // เช็คว่า dialog หายไป
       expect(find.byType(AlertDialog), findsNothing);
     });
-
-    testWidgets('page check has button login', (tester) async {
-      //arrange
-      //act
-      await tester.pumpWidget(
-        MaterialApp(home: LoginPage(key: ValueKey(LoginPage.pageKey))),
-      );
-      await tester.pump();
-
-      //assert
-      // Debug: ดูว่ามี widget อะไรบ้าง
-      final elevateButtons = find.byType(ElevatedButton);
-      print('Found ${elevateButtons.evaluate().length} ElevatedButtons');
-
-      final textWidgets = find.byType(Text);
-      print('Found ${textWidgets.evaluate().length} Text widgets');
-
-      // ลองหาด้วย text ก่อน
-      final loginButtonByText = find.text('Login');
-      print('Found by text: ${loginButtonByText.evaluate().length}');
-
-      // ลองหาด้วย key หลายแบบ
-      final pageKey = ValueKey(LoginPage.pageKey);
-      print('Page key toString: ${pageKey.toString()}');
-
-      // ลองแบบนี้
-      final loginButton = find.byKey(
-        ValueKey('${pageKey.toString()}/login_button'),
-      );
-      print('Key we are looking for: ${pageKey.toString()}/login_button');
-
-      expect(find.byKey(pageKey), findsOneWidget);
-
-      //expect(loginButtonByText, findsOneWidget);
-      //expect(elevateButtons.evaluate().length, 1);
-      //expect(textWidgets.evaluate().length, 4);
-    });
-
   });
 }

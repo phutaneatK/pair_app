@@ -1,14 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pair_api/domain/usecases/load_station_usecase.dart';
+import 'package:pair_api/domain/usecases/get_stations_usecase.dart';
 import 'station_event.dart';
 import 'station_state.dart';
 
 class StationBloc extends Bloc<StationEvent, StationState> {
-  final LoadStationUseCase _useCase;
-  final String _token;
+  final GetStationsUseCase _useCase;
 
   StationBloc(this._useCase, {String token = ''})
-    : _token = token,
+    :
       super(StationInitial()) {
     on<LoadStations>(_onLoadStations);
   }
@@ -24,8 +23,7 @@ class StationBloc extends Bloc<StationEvent, StationState> {
         event.minLat,
         event.minLon,
         event.maxLat,
-        event.maxLon,
-        _token,
+        event.maxLon
       );
       res.fold(
         (l) {
