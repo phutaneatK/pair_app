@@ -21,11 +21,17 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _pages = const [StationsPage(), MapPage(), FavoritePage()];
 
   @override
+  void initState() {
+    super.initState();
+    log("HonePage init ~");
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.red,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.red,
         elevation: 0,
         title: Text(
           'PAir',
