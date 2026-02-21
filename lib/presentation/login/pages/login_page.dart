@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pair_app/core/core.dart';
 import 'package:pair_app/presentation/login/bloc/login_bloc.dart';
 import 'package:pair_app/presentation/login/cubit/password_visibility_cubit.dart';
 import 'package:pair_app/router/app_routers.dart';
-import 'package:pcore/pcore.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

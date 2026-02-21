@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:pair_api/pair_api.dart';
+import 'package:pair_app/domain/entities/entities/station_entity.dart';
 
 abstract class StationState extends Equatable {
   @override

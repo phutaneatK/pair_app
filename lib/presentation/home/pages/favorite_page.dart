@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pcore/utils/logger.dart';
+import 'package:pair_app/core/utils/logger.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -9,8 +9,7 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-
-   @override
+  @override
   void initState() {
     super.initState();
     log("FavoritePage init ~");
@@ -19,15 +18,12 @@ class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.favorite,
-              size: 80,
-              color: Colors.grey[700],
-            ),
+            Icon(Icons.favorite, size: 80, color: Colors.grey[700]),
             const SizedBox(height: 16),
             Text(
               'Favorites',
@@ -40,10 +36,7 @@ class _FavoritePageState extends State<FavoritePage> {
             const SizedBox(height: 8),
             Text(
               'สถานีที่ชื่นชอบ',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-              ),
+              style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             ),
           ],
         ),

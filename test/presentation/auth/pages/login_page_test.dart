@@ -4,11 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pair_api/pair_api.dart';
+import 'package:pair_app/domain/entities/entities/user_entity.dart';
 import 'package:pair_app/presentation/login/bloc/login_bloc.dart';
 import 'package:pair_app/presentation/login/cubit/password_visibility_cubit.dart';
 import 'package:pair_app/presentation/login/pages/login_page.dart';
 import 'package:pair_app/router/app_routers.dart';
+import 'package:pair_app/core/navigation/cove_nav.dart';
 
 // Mocks
 class MockLoginBloc extends MockBloc<LoginEvent, LoginState>
@@ -38,6 +39,8 @@ void main() {
     mockLoginBloc = MockLoginBloc();
     mockPasswordVisibilityCubit = MockPasswordVisibilityCubit();
     mockGoRouter = MockGoRouter();
+
+    CoveNav.init(mockGoRouter);
 
     // Default states
     when(() => mockLoginBloc.state).thenReturn(LoginInitial());

@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pair_api/pair_api.dart';
+import 'package:pair_app/core/core.dart';
 import 'package:pair_app/core/services/auth_service.dart';
-import 'package:pcore/pcore.dart';
+import 'package:pair_app/domain/entities/entities/user_entity.dart';
+import 'package:pair_app/domain/usecases/check_login_usecase.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -14,8 +15,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     : super(LoginInitial()) {
     on<LoginSubmitted>((event, emit) async {
       emit(LoginLoading());
-
-      log('Login attempt: ${event.username}');
 
       final result = await checkLoginUseCase.execute(
         event.username,

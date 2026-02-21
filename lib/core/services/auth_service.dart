@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:pair_api/pair_api.dart';
+import 'package:pair_app/domain/repositories/auth_repository.dart';
 
 class AuthService {
   final FlutterSecureStorage _storage = const FlutterSecureStorage();

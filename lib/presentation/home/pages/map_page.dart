@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:pcore/pcore.dart';
+import 'package:pair_app/core/utils/logger.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -11,7 +11,7 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   GoogleMapController? _mapController;
-  
+
   // ตำแหน่งเริ่มต้น (กรุงเทพ)
   static const CameraPosition _initialPosition = CameraPosition(
     target: LatLng(13.7563, 100.5018),

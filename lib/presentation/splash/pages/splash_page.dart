@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pair_app/core/core.dart';
 import 'package:pair_app/presentation/splash/bloc/splash_bloc.dart';
 import 'package:pair_app/router/app_routers.dart';
-import 'package:pcore/pcore.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
